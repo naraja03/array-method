@@ -3,26 +3,20 @@
     <h1>Fetch data</h1>
     <button @click="fetch">Fetch</button>
     <button @click="filter">Filter Data</button>
-    <button @click="arrayPush">Filter object Data</button>
-    <p>{{ testArray }}</p>
-    <hr>
-    <h3>{{newArray}}</h3>
+    <h1>no of id in array - {{testArray.length}}</h1>
+    <h3>
+      [<h3 v-for="data in testArray" :key="data">{id: {{ data }}},</h3>]
+    </h3>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 export default {
   setup() {
-    let arrayData = ref({
-      
-    });
-
-    let newArray = reactive();
-
+    let arrayData = ref();
     let testArray = ref([]);
-
     let fetch = () => {
       console.log("success");
       axios
@@ -33,7 +27,6 @@ export default {
         })
         .catch((err) => console.log("error", err));
     };
-
     let filter = () => {
       arrayData.value.forEach((parent) => {
         if (parent.data) {
@@ -44,7 +37,6 @@ export default {
       console.log("Id count", testArray.value.length);
       console.log("Filter Data", testArray.value);
     };
-
     let recursion = (childData) => {
       if (childData.hasChild == true) {
         childData.children.forEach((grandChild) => {
@@ -56,20 +48,10 @@ export default {
       }
     };
 
-    let arrayPush = () => {
-      for (let values in testArray.value) {
-        newArray.push({
-          id: values,
-        });
-      }
-    };
-
     return {
       fetch,
       filter,
-      arrayPush,
       arrayData,
-      newArray,
       testArray,
       recursion,
     };

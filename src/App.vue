@@ -1,6 +1,10 @@
 <template>
   <div id="nav">
-    This is Main Page
+    App Component
+    <div>
+    <router-link to="/Task1" >Task1</router-link>
+		<router-link to="/Task2" >Task2</router-link>
+    </div>
   </div>
   <router-view/>
 </template>
